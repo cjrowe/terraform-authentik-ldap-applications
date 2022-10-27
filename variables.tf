@@ -19,17 +19,6 @@ variable "default_base_dn" {
   description = "The default Base DN to use for applications if one is not specified"
 }
 
-variable "default_bind_flow_uuid" {
-  type = string
-  description = "The default Bind Flow that will be applied to applications if one is not specified"
-}
-
-variable "default_bind_mode" {
-  type = string
-  description = "The default Bind Mode that will be applied to applications if one is not specified"
-  default = "direct"
-}
-
 variable "default_search_mode" {
   type = string
   description = "The default Bind Mode that will be applied to applications if one is not specified"
