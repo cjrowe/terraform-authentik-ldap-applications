@@ -11,7 +11,7 @@ resource authentik_group "ldap_clients" {
 }
 
 resource authentik_application "ldap_application" {
-  count = var.applications.length
+  count = length(var.applications)
 
   name = var.applications[count.index].name
   slug = var.applications[count.index].slug
@@ -19,7 +19,7 @@ resource authentik_application "ldap_application" {
 }
 
 resource authentik_provider_ldap "ldap_provider" {
-  count = var.applications.length
+  count = length(var.applications)
 
   name = "${title(var.applications[count.index].slug)}LDAP"
   base_dn = coalesce(var.applications[count.index].ldap_config["base_dn"], var.default_base_dn)
@@ -30,7 +30,7 @@ resource authentik_provider_ldap "ldap_provider" {
 }
 
 resource authentik_user "ldap_user" {
-  count = var.applications.length
+  count = length(var.applications)
 
   username = "ldap-${var.applications[count.index].slug}"
   name = "Service User used by ${var.applications[count.index].name} to authenticate against LDAP server"
@@ -39,7 +39,7 @@ resource authentik_user "ldap_user" {
 }
 
 resource authentik_token "ldap_app_password" {
-  count = var.applications.length
+  count = length(var.applications)
 
   identifier = "ldap-app-password-${var.applications[count.index].slug}"
   user = authentik_user.ldap_user[count.index].id
