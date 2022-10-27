@@ -1,7 +1,7 @@
 resource authentik_outpost "ldap_outpost" {
   name = "LDAP Outpost"
   type = "ldap"
-  protocol_providers = {for p in authentik_provider_ldap.ldap_provider : p => p.id}
+  protocol_providers = authentik_provider_ldap.ldap_provider[*].id
   service_connection = var.service_connection_id
   config = var.outpost_configuration
 }
