@@ -36,6 +36,7 @@ variable "applications" {
     name = string
     slug = string
     ldap_config = map(string)
+    user_ids = list(string)
   }))
   description = "Details of LDAP authenticated applications to create"
 }
