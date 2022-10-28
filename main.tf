@@ -19,6 +19,12 @@ resource authentik_application "ldap_application" {
 
   name = var.applications[count.index].name
   slug = var.applications[count.index].slug
+
+  group = lookup(var.applications[count.index].app_config, "group", "")
+  meta_description = lookup(var.applications[count.index].app_config, "description", "")
+  meta_launch_url = lookup(var.applications[count.index].app_config, "launch_url", "")
+  meta_publisher = lookup(var.applications[count.index].app_config, "publisher", "")
+
   protocol_provider = authentik_provider_ldap.ldap_provider[count.index].id
 }
 
