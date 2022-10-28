@@ -31,7 +31,7 @@ resource authentik_application "ldap_application" {
 resource authentik_group "ldap_application_users" {
   count = length(var.applications)
 
-  name = "${var.applications[count.index].slug}-users"
+  name = "app-users-${var.applications[count.index].slug}"
   users = var.applications[count.index].user_ids
 }
 
