@@ -22,6 +22,12 @@ resource authentik_application "ldap_application" {
   protocol_provider = authentik_provider_ldap.ldap_provider[count.index].id
 }
 
+resource authentik_group "ldap_application_users" {
+  count = length(var.applications)
+
+  name = "${var.applications[count.index].slug}-users"
+}
+
 resource authentik_provider_ldap "ldap_provider" {
   count = length(var.applications)
 
