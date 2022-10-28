@@ -67,7 +67,7 @@ resource authentik_flow_stage_binding "ldap_login_identification" {
 
   order = 10
   stage = data.authentik_stage.default_authentication_identification.id
-  target = authentik_flow.ldap_login.uuid
+  target = authentik_flow.ldap_login[0].uuid
 }
 
 resource authentik_flow_stage_binding "ldap_login_password" {
@@ -75,7 +75,7 @@ resource authentik_flow_stage_binding "ldap_login_password" {
 
   order = 20
   stage = data.authentik_stage.default_authentication_password.id
-  target = authentik_flow.ldap_login.uuid
+  target = authentik_flow.ldap_login[0].uuid
 }
 
 resource authentik_flow_stage_binding "ldap_login_login" {
@@ -83,7 +83,7 @@ resource authentik_flow_stage_binding "ldap_login_login" {
 
   order = 100
   stage = data.authentik_stage.default_authentication_login.id
-  target = authentik_flow.ldap_login.uuid
+  target = authentik_flow.ldap_login[0].uuid
 }
 
 data authentik_stage "default_authentication_identification" {
