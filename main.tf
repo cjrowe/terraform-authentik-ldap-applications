@@ -26,11 +26,11 @@ resource authentik_provider_ldap "ldap_provider" {
   count = length(var.applications)
 
   name = "${title(var.applications[count.index].slug)}LDAP"
-  base_dn = coalesce(var.applications[count.index].ldap_config["base_dn"], var.default_base_dn)
-  bind_flow = coalesce(var.applications[count.index].ldap_config["bind_flow_uuid"], authentik_flow.ldap_login[0].uuid)
+  base_dn = lookup(var.applications[count.index].ldap_config, "base_dn", var.default_base_dn)
+  bind_flow = lookup(var.applications[count.index].ldap_config, "bind_flow_uuid", authentik_flow.ldap_login[0].uuid)
   search_group = authentik_group.ldap_clients[0].id
-  bind_mode = coalesce(var.applications[count.index].ldap_config["bind_mode"], var.default_bind_mode)
-  search_mode = coalesce(var.applications[count.index].ldap_config["search_mode"], var.default_search_mode)
+  bind_mode = lookup(var.applications[count.index].ldap_config, "bind_mode", var.default_bind_mode)
+  search_mode = lookup(var.applications[count.index].ldap_config, "search_mode", var.default_search_mode)
 }
 
 resource authentik_user "ldap_user" {
